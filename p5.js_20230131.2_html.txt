@@ -1,0 +1,58 @@
+let x = 0;
+let y = 0;
+let d = 10;
+easing = 0.05;
+let len = 50;
+let dis = 40;
+let xx = 0;
+let yy = 0;
+let point =4.0
+let angle =360.0/point; 
+
+
+function setup() {
+  createCanvas(800, 800);
+}
+
+function draw() {
+  background("#A518ED");
+
+  function BOX() {
+    let px = x;
+    let py = y;
+    let xx=mouseX
+    let yy=mouseY
+ 
+    rect(xx, yy, len, len);
+  }
+
+  function BOXTWO() {
+    beginShape();
+    for (let degree=0; degree <360; degree+=angle){
+      let theta =radians(degree);
+      let x = mouseX+len *cos(theta);
+      let y = mouseY+len *sin(theta);
+      vertex(x,y);
+    } 
+    endShape(CLOSE);
+  }
+
+  if (mouseButton === LEFT) {
+    BOX(xx, yy);
+  }
+  if (mouseButton === RIGHT) {
+    BOXTWO(xx, yy);
+  }
+  xx = constrain(mouseX, 0, width + 100);
+  yy = constrain(mouseY, 0, height + 100);
+  
+  if (mouseIsPressed){
+  if(mouseX>width/2){
+    len++;
+  } else{
+    len--;
+  }
+  len=constrain(len,10,80);
+}
+}
+
