@@ -1,0 +1,37 @@
+// 1. 마우스를 따라다니는 평행사변형 (크기 변화x)
+// 2. 마우스 왼쪽을 드래그 ( 드래그 - 왼쪽 : 크기 감소 _ 최소값 지정, 오른쪽 : 크기 )
+// 3. 마우스 오른쪽 클릭할때마다 평행사변형이 왼쪽이나 오른쪽으로 90도씩 회전
+
+let angle, w, h, x, y;
+let x1,y1,x2,y2,x3,y3,x4,y4;
+function setup() {
+  createCanvas(400, 400);
+
+  window.oncontextmenu = function () {
+    return false;
+  };
+  angleMode(DEGREES);
+  w = 125;
+  h = 125;
+  x = 200-200;
+  y = 200 - h / 2-200;
+}
+
+function draw() {
+  background(220);
+  // rectMode(CENTER);
+  x = mouseX - w / 2 + h / 4-200;
+  y = mouseY - h / 2-200;
+  x1=y-200;
+  
+  fill(200);
+  translate(200, 200);
+  rotate(90);
+  quad(x, y, x + w, y, x + w - h / 2, y + h, x - h / 2, y + h);
+}
+function mouseDragged() {
+  if (mouseButton === LEFT) {
+    w = map(mouseX, 0, width, 50, 200);
+    h = map(mouseX, 0, width, 50, 200);
+  }
+}
