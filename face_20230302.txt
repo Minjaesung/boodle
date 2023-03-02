@@ -1,0 +1,64 @@
+let slider1;
+let slider2;
+let slider3;
+
+let width = 80;
+let height = 200;
+let between = 320;
+let colors = ["#F44336", "#9C27B0", "#2196F3", "#4CAF50", "#FF9800"];
+let mainColor = colors[0];
+
+function setup() {
+  createCanvas(800, 800);
+  slider1 = createSlider(10, 200, 100); // 도형의 가로 너비 조절
+  slider1.position(650, 20); //
+  slider1.input(updatewidth); //
+  slider2 = createSlider(10, 200, 100); // 도형의 세로 높이 조절
+  slider2.position(650, 50);
+  slider2.input(updateHeight);
+  slider3 = createSlider(10, 200, 100); // 도형간의 간격 조절
+  slider3.position(650, 80);
+  slider3.input(updatebetween); //
+}
+
+// 기본 rect 한개와 서브 rect을 색상별로 여러개 만들고 각각의 서브rect을 선택할때마다 서브rect 도형의 색상이 기본 rect 색상에 반영되는 코드
+
+function draw() {
+  background(220);
+  fill(mainColor);
+  rectMode(CENTER);
+  noStroke();
+  rect(200 + between, 400, width, height, 50);
+
+  rect(600 - between, 400, width, height, 50);
+
+  for (let i = 0; i < colors.length; i++) {
+    fill(colors[i]);
+    rect((i + 21.5) * 30, 130, 20, 20);
+  }
+}
+
+function mouseClicked() {
+  for (let i = 0; i < colors.length; i++) {
+    if (
+      mouseX > (i + 21.5) * 30 - 10 &&
+      mouseX < (i + 21.5) * 30 + 10 &&
+      mouseY > 120 &&
+      mouseY < 140
+    ) {
+      mainColor = colors[i];
+    }
+  }
+}
+
+function updatewidth() {
+  width = slider1.value();
+}
+
+function updateHeight() {
+  height = slider2.value();
+}
+
+function updatebetween() {
+  between = slider3.value();
+}
